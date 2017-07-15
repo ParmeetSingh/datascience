@@ -1,0 +1,71 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "# https://deeplearningcourses.com/c/deep-learning-recurrent-neural-networks-in-python\n",
+    "# https://udemy.com/deep-learning-recurrent-neural-networks-in-python\n",
+    "import numpy as np\n",
+    "import string\n",
+    "import os\n",
+    "import operator\n",
+    "from nltk import pos_tag, word_tokenize\n",
+    "from datetime import datetime\n",
+    "\n",
+    "\n",
+    "def all_parity_pairs(nbit):\n",
+    "    # total number of samples (Ntotal) will be a multiple of 100\n",
+    "    # why did I make it this way? I don't remember.\n",
+    "    N = 2**nbit\n",
+    "    remainder = 100 - (N % 100)\n",
+    "    Ntotal = N + remainder\n",
+    "    X = np.zeros((Ntotal, nbit))\n",
+    "    Y = np.zeros(Ntotal)\n",
+    "    for ii in xrange(Ntotal):\n",
+    "        i = ii % N\n",
+    "        # now generate the ith sample\n",
+    "        for j in xrange(nbit):\n",
+    "            if i % (2**(j+1)) != 0:\n",
+    "                i -= 2**j\n",
+    "                X[ii,j] = 1\n",
+    "        Y[ii] = X[ii].sum() % 2\n",
+    "    return X, Y"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 2",
+   "language": "python",
+   "name": "python2"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 2
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython2",
+   "version": "2.7.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
